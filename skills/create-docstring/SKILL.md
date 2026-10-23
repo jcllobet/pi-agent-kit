@@ -1,17 +1,19 @@
 ---
 name: create-docstring
-description: Create or update function docstrings or equivalent function documentation when behavior, inputs, outputs, or language-specific details still need explanation despite clear names and structure. Use while creating or changing functions, or when asked to document them. Adjust detail to the user's language familiarity.
+description: Use when writing or changing a function and callers need details its name and types do not show, such as input limits, side effects, or behavior on empty input. Also use when asked to write or update function documentation. Match the detail to the user's language familiarity.
 ---
 
 # Create docstring
 
-Simplify confusing functions first; do not use docstrings to excuse bad code. Do not document every function. Skip obvious getters, wrappers, or helpers when documentation would only repeat their names and types.
+## When to use
 
-## When useful
+Use this skill when writing or changing a function and a caller needs details its name and types do not show. Examples include whether the function modifies an argument, what it returns for empty input, or whether a tensor mask includes or excludes `True` values. Also use it when the user asks for function documentation.
 
-Document details a caller could otherwise misunderstand: input meaning or constraints, units, tensor shapes, output meaning, edge cases, mutation, ownership, concurrency, or errors. Include only the details relevant to that function.
+Skip documentation that would only repeat names and types. If unclear variable names or unnecessary branches make the code hard to follow, report that code issue rather than explain it in a docstring.
 
-Read the user's language preferences in the active AGENTS.md instructions. For less familiar languages, lower the threshold for documentation and explain relevant language-specific behavior. For familiar languages, document only behavior that still needs explanation. Do not turn extra detail into line-by-line narration. If no preference is given, use the selective rule above.
+## Language familiarity
+
+Use the language preferences in AGENTS.md. Give more explanation in languages the user knows less well, including unfamiliar ownership or async behavior when it matters to the function. Otherwise, focus on input requirements and observable behavior. Do not explain individual lines of syntax.
 
 ## Format
 
@@ -24,7 +26,7 @@ Describe what the function does, its inputs, and its output. Do not repeat what 
 - C/C++: follow the repository's documentation style, such as Doxygen.
 - Other languages: follow the repository's native function-documentation style.
 
-For example, `masked_softmax` converts selected tensor values into probabilities. Its docstring clarifies which mask values are included and what happens when everything is excluded—choices the function's name does not explain.
+For example, `masked_softmax` computes probabilities from selected tensor values. A caller needs to know whether `True` selects or excludes a value and what the function returns when every value is excluded.
 
 ```python
 from torch import Tensor
@@ -50,6 +52,6 @@ def masked_softmax(logits: Tensor, mask: Tensor, dim: int = -1) -> Tensor:
 
 ## Scope
 
-Inspect the function, callers, and existing tests before describing behavior. Do not invent guarantees or claim validation that did not happen. Report unclear behavior or needed simplification instead of guessing.
+Read the function, its callers, and existing tests before documenting its behavior. If the behavior is unclear, report what you could not determine. Do not invent guarantees or claim checks you did not run.
 
-Edit only function documentation. Do not change runtime behavior, add tests or dependencies, access credentials, or publish changes without separate authorization.
+Change only function documentation. Do not refactor code, add tests or dependencies, access credentials, or publish changes without separate authorization.

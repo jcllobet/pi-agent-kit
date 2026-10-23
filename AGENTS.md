@@ -31,7 +31,7 @@ For completed fixes or changes:
 
 ## Function docstrings
 
-Simplify confusing functions first; do not use docstrings to excuse bad code. Add a docstring only when the function still needs explanation despite clear names and structure.
+Add a docstring when callers need details the function's name and types do not show, such as input limits, side effects, or behavior on empty input. Fix unclear variable names or unnecessary branches instead of explaining them in comments.
 
 ## Verification Loop
 
