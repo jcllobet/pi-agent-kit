@@ -82,6 +82,7 @@ To turn off skills you do not want, run `pi config`, or narrow the kit entry in 
 | self-heal | Groups failed tool results into one recovery message and allows one safe retry |
 | fetch-error-normalizer | Marks failed `web_fetch` and fully failed `batch_web_fetch` results as errors so self-heal sees them |
 | hunk-inline | Shows `edit` and `write` results as compact diffs |
+| mermaid-fit | When a Mermaid flowchart is too wide for the terminal, draws it in the other direction (`LR` ↔ `TD`). If it still does not fit, adds a line that gives the needed width instead of showing only the source |
 | file-preview | Click file links in the transcript to open them in nvim; Alt+O quick open |
 | right-column | Shared right-side column that the pi-desk task panel uses |
 | cmux-needs-input | Sends a cmux notification when `ask_user_question` waits for you |
