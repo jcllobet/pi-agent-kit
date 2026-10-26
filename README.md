@@ -46,7 +46,7 @@ To try only the kit for one session, without the installer: `pi -e git:github.co
 | pr-description | Short pull request descriptions |
 | self-heal | Recover from tool, extension, provider, and subagent failures |
 | skill-creator | Create and improve skills |
-| visual-explanations | Pele diagrams by default; Excalidraw for editable canvases; Archify for explorable system diagrams |
+| visual-explanations | Native-first visual explanations; [renderer selection, layout, and verification](skills/visual-explanations/SKILL.md) |
 
 Optional skills. They load with the kit but need your own setup; without it they report the missing piece:
 
