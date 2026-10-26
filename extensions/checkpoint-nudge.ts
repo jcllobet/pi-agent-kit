@@ -3,7 +3,8 @@ import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 // Prose stop rules fade in long runs. This extension counts work done since the
 // last user message and steers the agent to the AGENTS.md "Larger Work" check.
 const FILE_STEP = 5; // Matches the "~5 file edits" large-work threshold.
-const CALL_STEP = 40;
+// At 40, 92% of nudges in a week of sessions were followed by more work, not a stop.
+const CALL_STEP = 80;
 const EDIT_TOOLS = new Set(["edit", "write"]);
 
 function checkpointPrompt(files: number, calls: number): string {
