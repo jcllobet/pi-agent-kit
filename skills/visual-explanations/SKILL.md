@@ -1,11 +1,11 @@
 ---
 name: visual-explanations
-description: Create shareable graphical diagrams or visuals that Pi's native terminal cannot show clearly. Use for SVG/HTML diagram deliverables, unsupported or unreadable native diagrams, validated explorable system diagrams, editable canvases, or explicit Pele, Archify, or Excalidraw requests. Not for routine terminal explanations, Markdown tables, or native Mermaid that already reads clearly.
+description: Create compact, shareable visuals for architecture, processes, tradeoffs, plans, bugs, and reviews. Use for diagram files, editable canvases, or visuals that need more than Pi's terminal.
 ---
 
 # Visual Explanations
 
-Use this skill for graphical artifacts to share or when the terminal cannot show the requested diagram clearly. Routine explanations inside Pi stay with the native Visuals guidance in `AGENTS.md`; do not create an artifact just because a diagram helps.
+Make a clear graphical diagram for sharing or when Pi's terminal is not enough.
 
 ## Choose and build
 
