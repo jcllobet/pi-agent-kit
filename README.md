@@ -26,7 +26,7 @@ To try only the kit for one session, without the installer: `pi -e git:github.co
 
 ### Global rules
 
-`AGENTS.md` holds the working style: plain short English, smallest correct change, verify with the real system, a plan and stop rules for larger work, and a fixed completion-report format. The installer copies it to `~/.pi/agent/AGENTS.md`. Edit your copy freely.
+`AGENTS.md` holds the working style: plain short English, smallest correct change, verify with the real system, a plan and stop rules for larger work, and a fixed completion-report format. It also owns native Pi terminal visuals for explanations inside the conversation. The installer copies it to `~/.pi/agent/AGENTS.md`. Edit your copy freely.
 
 ### Skills
 
@@ -46,7 +46,7 @@ To try only the kit for one session, without the installer: `pi -e git:github.co
 | pr-description | Short pull request descriptions |
 | self-heal | Recover from tool, extension, provider, and subagent failures |
 | skill-creator | Create and improve skills |
-| visual-explanations | Native-first visual explanations; [renderer selection, layout, and verification](skills/visual-explanations/SKILL.md) |
+| visual-explanations | [Shareable graphical diagrams and terminal fallbacks](skills/visual-explanations/SKILL.md): Pele by default, Archify for validated explorable system diagrams, Excalidraw for editable canvases |
 
 Optional skills. They load with the kit but need your own setup; without it they report the missing piece:
 

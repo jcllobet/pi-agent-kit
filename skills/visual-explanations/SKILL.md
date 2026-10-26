@@ -1,56 +1,51 @@
 ---
 name: visual-explanations
-description: Creates compact visuals for architecture, process, tradeoffs, plans, bugs, and reviews. Use when asked for a diagram, visual explanation, or Excalidraw, or when a non-trivial explanation is clearer with one.
+description: Create shareable graphical diagrams or visuals that Pi's native terminal cannot show clearly. Use for SVG/HTML diagram deliverables, unsupported or unreadable native diagrams, validated explorable system diagrams, editable canvases, or explicit Pele, Archify, or Excalidraw requests. Not for routine terminal explanations, Markdown tables, or native Mermaid that already reads clearly.
 ---
 
 # Visual Explanations
 
-Clarify the main question. Skip factual one-liners and requests for no visual.
+Use this skill for graphical artifacts to share or when the terminal cannot show the requested diagram clearly. Routine explanations inside Pi stay with the native Visuals guidance in `AGENTS.md`; do not create an artifact just because a diagram helps.
 
 ## Choose and build
 
-Honor explicit tool or format requests. Otherwise choose the smallest readable option below and build it without asking the user to choose a renderer.
+Honor explicit tool or format requests. Otherwise choose the first matching row and build it without asking the user to choose a renderer.
 
 | Need | Use |
 |---|---|
-| Small, answer-local explanation | Markdown table or text flow |
-| Diagram within the conversation | Pi's native Mermaid rendering first |
-| SVG or simple HTML without a validated, explorable workflow; unsupported native type or unreadable terminal layout | Pele |
-| Validated, explorable system-diagram deliverable | `archify`; follow its full workflow and do not replace its renderer with Pele |
-| Editable canvas | Excalidraw |
+| Validated, explorable system diagram with navigation, relationship tracing, or presentation controls | `archify`; follow its full workflow and do not replace its renderer with Pele |
+| Editable or free-form canvas | Excalidraw |
+| Any other graphical diagram: shareable SVG/simple HTML, unsupported native diagram type, or layout/labels the terminal cannot show clearly | Pele (default) |
 
-- Pi displays Markdown tables, highlighted code blocks, links, and LaTeX math (as Unicode) directly; use these when a diagram is unnecessary.
-- Use option-specific previews for structured questions.
-- For code changes, inspect the diff and show affected boundaries, risk, and blast radius; visuals supplement diff notes.
-- For current-versus-planned operations, show actual triggers and trace concrete incident examples.
-
-## Native Mermaid
-
-- Fenced `mermaid` blocks render as Unicode box diagrams for `flowchart`, `sequenceDiagram`, `stateDiagram-v2`, `classDiagram`, and `erDiagram`. Unsupported types, grok-mermaid warnings, diagrams wider than the terminal, and diagrams in thinking show as source.
-- Keep diagrams within the terminal width; aim below ~100 columns. Prefer `TD` for more than four nodes and keep labels short without losing meaning.
-- Put flowchart edge labels in pipes (`A -.->|text| B`), never inline (`A -. "text" .-> B`): a `<` or `>` in an inline label can drop the edge. `<br/>` does not break lines. Node text wraps at 24 columns (four lines, then `…`); edge labels truncate at 28 characters.
-- Fix warnings, width, and truncated labels before accepting the terminal result. Change layout, not meaning; use Pele if the diagram still cannot be shown clearly.
+A request for a diagram file or HTML alone does not require Archify. Create local artifacts; do not publish or send private source to a hosted service without explicit authorization.
 
 ## Pele
 
-- Use `render(source).svg` from `pele` for SVG output, or `mount(element, source)` for browser layout. See [API and theming](https://pele.run).
-- Keep the Mermaid source with the output. Include any `--pele-*` theme variables in the saved artifact.
+Use Pele for ordinary text-defined diagrams that need graphical output: a flowchart for a report, a sequence diagram to share, a chart Pi does not render, or a diagram whose full labels and layout cannot remain readable in the terminal. Pele renders Mermaid to SVG; it is not a codebase-exploration or validated system-diagram workflow.
+
+- Use `render(source).svg` from `pele` for SVG files. For browser output, use `mount(element, source)` for font measurement, container fitting, resizing, supported automatic direction changes, and zoom. See [API and theming](https://pele.run).
+- Keep the Mermaid source with the output. Preserve meaning; do not remove relationships or meaningful labels to make the diagram fit.
+- Include `--pele-*` theme variables in the saved artifact. HTML must carry its required assets, not depend on a machine-specific installation path; use pre-rendered SVG or bundle the renderer when browser interaction is needed.
 - Reuse an installed copy or an isolated workspace; do not add project dependencies just to create a diagram.
 
-## Layout
+## Graphical layout
 
-- Set Excalidraw text to sans-serif (`fontFamily: 2`) unless handwriting is explicitly requested. If font family changes, resize or recreate affected text; old bounds are stale.
-- Keep every label inside its node or panel with clear space at the edges. Shorten labels, add semantic line breaks, or enlarge nodes before reducing font size.
-- Use one reading direction, clear primary flow, whitespace, and consistent alignment. Reserve nodes for entities, systems, decisions, or flow-changing steps; use badges or callouts for attributes and status. Merge repeated infrastructure.
-- Keep labels to a noun and short qualifier where possible. For SVG or canvas output, keep fitted text legible: roughly 24+ for titles, 16+ for nodes, 13+ for annotations. Split dense diagrams rather than shrinking them.
+These rules apply to Pele and Excalidraw. Archify owns its own authoring, layout, and verification contracts.
+
+- Set Excalidraw text to sans-serif (`fontFamily: 2`) unless handwriting is explicitly requested. If the font changes, resize or recreate affected text; old bounds are stale.
+- Keep every label inside its node or panel with clear space at the edges. Shorten wording without losing meaning, add semantic line breaks, or enlarge nodes before reducing font size.
+- Use one reading direction, a clear primary flow, whitespace, and consistent alignment. Reserve nodes for entities, systems, decisions, or flow-changing steps; use badges or callouts for attributes and status. Merge repeated infrastructure.
+- Keep text legible: roughly 24+ px for titles, 16+ px for nodes, and 13+ px for annotations. Split dense diagrams rather than shrinking them.
 - Use restrained color only for meaning; pair it with words, symbols, or line styles. Omit unused mechanisms unless their absence is itself a decision.
 
 ## Verify and share
+
+For Archify, follow its full delivery and verification workflow instead of the steps below.
 
 1. For Excalidraw, open its URL once per task in a right-side cmux browser pane and reuse it:
    ```sh
    cmux new-pane --type browser --direction right --url "$EXCALIDRAW_URL" --focus false
    ```
    If cmux is unavailable, use the normal browser and report the fallback.
-2. For native Mermaid, check the rendered terminal result for missing or truncated labels and relationships. A fenced source block alone does not prove rendering. If the terminal result cannot be inspected, say so rather than claiming visual validation.
-3. For Pele or Excalidraw, fit the diagram and inspect a screenshot at normal size: `read` a PNG or call `excalidraw_capture_screenshot`. Purpose, direction, start/end, and uncertainty must be clear. Check every label, including diamonds and callouts, for crowding or overflow. Fix and recapture until no text touches or crosses borders. Do not claim visual validation without inspecting the result. Archify uses its own verification workflow.
+2. For Pele or Excalidraw, fit the diagram and inspect a screenshot at normal size: `read` a PNG or call `excalidraw_capture_screenshot`. Purpose, direction, start/end, and uncertainty must be clear. Check labels, diamonds, callouts, arrows, contrast, and clipping. For responsive Pele HTML, check narrow and wide containers and resize behavior. Fix and recapture until no text touches or crosses borders.
+3. Save the shareable artifact and its source. Give the artifact link and state any missing evidence or checks. Parsing alone is not visual validation; claim visual inspection only when performed.

@@ -20,16 +20,27 @@ Show, do not narrate. Choose the visual by content:
 | Status | One symbol: ✅ done · ⛔ blocked · ⚠️ budget, drift, or surprise |
 | Files changed | Table: `path:line` · change |
 | Options or tradeoffs | Table, recommended row first, marked ★ |
-| Process, cause chain, data flow | `visual-explanations` skill |
+| Process, cause chain, data flow | Text flow: `A → B → C`; a native `mermaid` block when it branches |
 | Evidence | Short code block with the real output |
-| Architecture, sequence, state, data model | `visual-explanations` skill |
+| Architecture, sequence, state, data model | Native `mermaid` block |
 
 - One visual per idea. No decoration. No table for one row.
 - Use prose only for what a visual cannot carry: why, and what next.
 - Use real names from the code or data. Mark unknown parts as unknown.
 - When you create or change something the user will look at (file, sheet, PR, setting, record), give its path or link in the first lines of the reply.
 
-- Use `visual-explanations` when a visual makes the answer clearer. It owns renderer selection, layout, and visual verification.
+### Visuals
+
+Use Pi's native terminal output for explanations within the conversation. Skip factual one-liners and requests for no visual. Do not create files or open a browser just because a diagram would help.
+
+- Markdown: tables for comparisons, text flows for short linear explanations, highlighted code blocks, links, and LaTeX math (as Unicode).
+- Fenced `mermaid` blocks render as Unicode box diagrams: `flowchart`, `sequenceDiagram`, `stateDiagram-v2`, `classDiagram`, `erDiagram`. Other types, grok-mermaid warnings, diagrams wider than the terminal, and diagrams in thinking show as source.
+- Keep diagrams within the terminal width; aim below ~100 columns. Prefer `TD` for more than four nodes and keep labels short without losing meaning.
+- Put flowchart edge labels in pipes (`A -.->|text| B`), never inline (`A -. "text" .-> B`): a `<` or `>` in an inline label can drop the edge. `<br/>` does not break lines. Node text wraps at 24 columns (four lines, then `…`); edge labels truncate at 28 characters.
+- Check the rendered terminal result for missing or truncated labels and relationships. A fenced source block alone does not prove rendering. Fix syntax or layout without dropping meaning. If you cannot inspect the terminal result, do not claim visual validation.
+- Use option-specific previews for structured questions. For code changes, inspect the diff and show affected boundaries, risk, and blast radius. For current-versus-planned operations, show actual triggers and concrete incident examples.
+
+Use `visual-explanations` when the user wants a graphical artifact to share, native output cannot show the requested diagram clearly, or an external renderer or editable canvas is explicitly requested. That skill owns external tool selection, graphical layout, and artifact verification; routine terminal explanations do not need it.
 
 ### Completion Report
 
