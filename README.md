@@ -32,7 +32,7 @@ To try only the kit for one session, without the installer: `pi -e git:github.co
 
 | Skill | Use |
 |---|---|
-| archify | Validated architecture, workflow, sequence, data-flow, and lifecycle diagrams as standalone HTML |
+| archify | Validated architecture, workflow, sequence, data-flow, lifecycle, ERD, class, tree, timeline, and waterfall diagrams, and one-page explainers, as standalone HTML. Vendored from [tt-a1i/archify](https://github.com/tt-a1i/archify) v3.2.0 |
 | babysit | Watch CI, deploys, or rollouts, fix safe minor failures, re-check |
 | blast-radius | What a change could break beyond its diff |
 | context-gardener | Keep a project's `CONTEXT.md` glossary accurate |
