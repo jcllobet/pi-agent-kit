@@ -7,12 +7,15 @@ import {
 const COMPLETE_EVENT = "subagent:async-complete";
 const ENTRY_TYPE = "self-heal-recovery";
 const GLOBAL_KEY = "__piSelfHealCleanup";
+// pi-subagents resumes workflows cut off by a Pi exit or reload, or its notice says how to resume by hand.
+const RESUMABLE_STOP_CAUSES = new Set(["owner-exited", "runtime-replaced"]);
 
 type Completion = {
   runId?: string;
   success?: boolean;
   state?: string;
   summary?: string;
+  workflow?: { stopCause?: string };
   results?: Array<{ status?: string; success?: boolean; error?: string }>;
 };
 
@@ -29,6 +32,7 @@ function contentText(content: Array<{ type: string; text?: string }>): string {
 
 function completionFailed(event: Completion): boolean {
   if (event.state === "stopped" || event.state === "paused") return false;
+  if (RESUMABLE_STOP_CAUSES.has(event.workflow?.stopCause ?? "")) return false;
   if (event.success === false || event.state === "failed") return true;
   return event.results?.some((item) => item.success === false || item.status === "failed") ?? false;
 }

@@ -32,7 +32,7 @@ To try only the kit for one session, without the installer: `pi -e git:github.co
 
 | Skill | Use |
 |---|---|
-| archify | Validated architecture, workflow, sequence, data-flow, and lifecycle diagrams as standalone HTML |
+| archify | Validated architecture, workflow, sequence, data-flow, lifecycle, ERD, class, tree, timeline, and waterfall diagrams, and one-page explainers, as standalone HTML. Vendored from [tt-a1i/archify](https://github.com/tt-a1i/archify) v3.2.0 |
 | babysit | Watch CI, deploys, or rollouts, fix safe minor failures, re-check |
 | blast-radius | What a change could break beyond its diff |
 | context-gardener | Keep a project's `CONTEXT.md` glossary accurate |
@@ -77,6 +77,7 @@ To turn off skills you do not want, run `pi config`, or narrow the kit entry in 
 | self-heal | Groups failed tool results into one recovery message and allows one safe retry |
 | fetch-error-normalizer | Marks failed `web_fetch` and fully failed `batch_web_fetch` results as errors so self-heal sees them |
 | hunk-inline | Shows `edit` and `write` results as compact diffs |
+| mermaid-fit | When a Mermaid flowchart is too wide for the terminal, draws it in the other direction (`LR` ↔ `TD`). If it still does not fit, adds a line that gives the needed width instead of showing only the source |
 | file-preview | Click file links in the transcript to open them in nvim; Alt+O quick open |
 | right-column | Shared right-side column that the pi-desk task panel uses |
 | cmux-needs-input | Sends a cmux notification when `ask_user_question` waits for you |

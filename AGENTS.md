@@ -5,6 +5,7 @@
 - Write in ASD-STE100 Simplified Technical English: short active sentences, common words. Make each answer clear without rereading the thread. Use the exact terms from `CONTEXT.md` (and `CONTEXT-MAP.md` when present). Define new terms once.
 - Simplicity first, in ideas, design, and code. Prefer the smallest correct change: delete, reuse, or simplify before adding.
 - When the next step is clear and in scope, do it. Do not ask again for permission already given. Continue until done, blocked, or a stop event (see Larger Work).
+- Continue the existing PR, branch, file, or sheet unless the user asks for a new one. If a new one seems better, ask first.
 - When confidence is low, gather more information. If it is still low, ask the user.
 - To work like an expert, use the expert's methods and tools, not only their words. Start from the rawest source available (logs, data, source code, transcripts), not from summaries. Name a role only to choose methods; do not role-play.
 - Make errors actionable: operation, target, cause, and recovery step.
@@ -26,6 +27,7 @@ Show, do not narrate. Choose the visual by content:
 - One visual per idea. No decoration. No table for one row.
 - Use prose only for what a visual cannot carry: why, and what next.
 - Use real names from the code or data. Mark unknown parts as unknown.
+- When you create or change something the user will look at (file, sheet, PR, setting, record), give its path or link in the first lines of the reply.
 
 ### Visuals
 
@@ -33,6 +35,7 @@ The Pi terminal renders these natively. Use them when a visual makes a non-trivi
 
 - Markdown: tables, highlighted code blocks, links, and LaTeX math (as Unicode).
 - Fenced `mermaid` blocks render as Unicode box diagrams: `flowchart`, `sequenceDiagram`, `stateDiagram-v2`, `classDiagram`, `erDiagram`. Other types, diagrams wider than the terminal, and diagrams in thinking show as source. Keep diagrams under ~100 columns: use `TD` for more than 4 nodes and short labels.
+- Pi shows the source for any grok-mermaid warning, not only for width. Put flowchart edge labels in pipes (`A -.->|text| B`), never inline (`A -. "text" .-> B`): a `<` or `>` in an inline label drops the edge. `<br/>` does not break lines; node text wraps at 24 columns (4 lines, then `…`), and edge labels are cut at 28 characters.
 - Inline images from tool results: `read` a PNG or call `excalidraw_capture_screenshot`.
 - For an editable canvas, run `load_toolset` `excalidraw`, use sans-serif text (`fontFamily: 2`), and check a screenshot before you show it.
 - For a standalone diagram file to share, use the `archify` skill.
@@ -114,3 +117,7 @@ Stop and send a completion report on:
 
 - context-mode blocks `curl`/`wget` in `bash` unless the call is silent and writes to a file (`curl -s -o /tmp/x.json URL`). Run HTTP calls that pipe or print output in `ctx_execute` with `language: shell`.
 - `ctx_execute`/`ctx_batch_execute` shell code runs in `/bin/bash` 3.2. No `mapfile`, `declare -A`, or `${var,,}`.
+- To wait for CI, use `gh pr checks <pr> --watch` or `gh run watch <id>`. To wait for a process or log, run a bounded loop that exits on the condition (`until <check>; do sleep 10; done` with a timeout). Do not chain fixed `sleep` calls.
+- `agent_browser` `eval`: top-level `await` fails. Use `(async () => { …; return value; })()`. Before `fetch` in `eval`, run `get url`: on `about:blank` or another origin, `open` the app first and use absolute URLs.
+- `agent_browser_code` allows 25 browser calls per run. For loops over many items, do the loop inside one `eval`, or split the work into several runs.
+- After an `agent_browser` watchdog timeout, do not repeat the same call. Use a condition `wait`, split the work, or pass a higher `timeoutMs`.

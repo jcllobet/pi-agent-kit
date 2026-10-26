@@ -13,6 +13,7 @@ const LIMIT = 8_000;
 const HEAD = 2_500;
 const TAIL = 1_500;
 const KEEP_DAYS = 7;
+const READ_LIMIT = 200; // Lines per read of a spill file; a whole-file read undoes the spill.
 const ROOT = join(homedir(), ".pi", "agent", "tmp", "tool-output");
 
 function removeOldSpills() {
@@ -29,6 +30,13 @@ function removeOldSpills() {
 
 export default function outputSpill(pi: ExtensionAPI) {
 	pi.on("session_start", () => removeOldSpills());
+
+	// A week of sessions had 45 reads that loaded a whole spill file back into context.
+	pi.on("tool_call", (event) => {
+		if (event.toolName !== "read") return;
+		const input = event.input as { path?: unknown; limit?: unknown };
+		if (typeof input.path === "string" && input.path.startsWith(ROOT) && input.limit === undefined) input.limit = READ_LIMIT;
+	});
 
 	pi.on("tool_result", (event, ctx) => {
 		// Nested calls feed a calling script, not the model, so they keep their full output.
@@ -49,7 +57,7 @@ export default function outputSpill(pi: ExtensionAPI) {
 		const lines = text.split("\n").length;
 		const note =
 			`\n\n[… ${(text.length - HEAD - TAIL).toLocaleString("en-US")} chars omitted. Full output (${text.length.toLocaleString("en-US")} chars, ${lines.toLocaleString("en-US")} lines) saved to ${path}. ` +
-			`Inspect it with read (offset/limit), grep, or ctx_execute_file. Do not print it again in full.]\n\n`;
+			`Search it with grep or ctx_execute_file, or read one part with read offset/limit. Do not print it again in full.]\n\n`;
 		const images = event.content.filter((block) => block.type === "image");
 		return {
 			content: [{ type: "text", text: text.slice(0, HEAD) + note + text.slice(-TAIL) }, ...images],
