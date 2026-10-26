@@ -87,6 +87,7 @@ To turn off skills you do not want, run `pi config`, or narrow the kit entry in 
 | right-column | Shared right-side column that the pi-desk task panel uses |
 | cmux-needs-input | Sends a cmux notification when `ask_user_question` waits for you |
 | subright | `/subright` opens the current Pi branch in a new cmux pane on the right |
+| output-spill | Saves `bash`, `gappd_query`, and `ctx_batch_execute` results over 8 KB to `~/.pi/agent/tmp/tool-output/<session>/` and gives the model the head, the tail, and the path. Files older than 7 days are deleted |
 
 The cmux and nvim extensions do nothing outside cmux or without nvim.
 
