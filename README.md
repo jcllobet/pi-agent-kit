@@ -26,7 +26,7 @@ To try only the kit for one session, without the installer: `pi -e git:github.co
 
 ### Global rules
 
-`AGENTS.md` holds the working style: plain short English, smallest correct change, verify with the real system, a plan and stop rules for larger work, and a fixed completion-report format. It also explains native Pi terminal visuals and when to load a visualization skill. The installer copies it to `~/.pi/agent/AGENTS.md`. Edit your copy freely.
+`AGENTS.md` holds the working style: plain short English, smallest correct change, verify with the real system, a plan and stop rules for larger work, and a fixed completion-report format. The installer copies it to `~/.pi/agent/AGENTS.md`. Edit your copy freely.
 
 ### Skills
 
