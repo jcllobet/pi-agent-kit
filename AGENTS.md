@@ -31,7 +31,7 @@ Show, do not narrate. Choose the visual by content:
 
 ### Visuals
 
-Use Pi's native terminal output for explanations within the conversation. Skip factual one-liners and requests for no visual. Do not create files or open a browser just because a diagram would help.
+The Pi terminal renders these natively. Use them when a visual makes a non-trivial answer clearer:
 
 - Markdown: tables for comparisons, text flows for short linear explanations, highlighted code blocks, links, and LaTeX math (as Unicode).
 - Fenced `mermaid` blocks render as Unicode box diagrams: `flowchart`, `sequenceDiagram`, `stateDiagram-v2`, `classDiagram`, `erDiagram`. Other types, grok-mermaid warnings, diagrams wider than the terminal, and diagrams in thinking show as source.
@@ -40,7 +40,11 @@ Use Pi's native terminal output for explanations within the conversation. Skip f
 - Check the rendered terminal result for missing or truncated labels and relationships. A fenced source block alone does not prove rendering. Fix syntax or layout without dropping meaning. If you cannot inspect the terminal result, do not claim visual validation.
 - Use option-specific previews for structured questions. For code changes, inspect the diff and show affected boundaries, risk, and blast radius. For current-versus-planned operations, show actual triggers and concrete incident examples.
 
-Use `visual-explanations` when the user wants a graphical artifact to share, native output cannot show the requested diagram clearly, or an external renderer or editable canvas is explicitly requested. That skill owns external tool selection, graphical layout, and artifact verification; routine terminal explanations do not need it.
+Choose the workflow by the deliverable; honor explicit tool or format requests:
+
+- Use native Pi output when it communicates the idea clearly in the terminal.
+- Use `archify` directly for validated, explorable system diagrams or structured explainer pages. Follow its full workflow.
+- Use `visual-explanations` for other graphical diagram files, richer visual layout, or editable canvases.
 
 ### Completion Report
 
