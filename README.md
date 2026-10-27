@@ -46,7 +46,7 @@ To try only the kit for one session, without the installer: `pi -e git:github.co
 | pr-description | Short pull request descriptions |
 | self-heal | Recover from tool, extension, provider, and subagent failures |
 | skill-creator | Create and improve skills |
-| visual-explanations | [Shareable diagrams and richer visual layout](skills/visual-explanations/SKILL.md): Pele for Mermaid SVG/HTML; Excalidraw for editable canvases |
+| visual-explanations | [Clear visual explanations](skills/visual-explanations/SKILL.md) with Pele-rendered Mermaid diagrams and editable Excalidraw canvases |
 
 Optional skills. They load with the kit but need your own setup; without it they report the missing piece:
 
