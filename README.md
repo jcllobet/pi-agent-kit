@@ -81,7 +81,7 @@ To turn off skills you do not want, run `pi config`, or narrow the kit entry in 
 | checkpoint-nudge | After long runs without user input, reminds the agent of the `AGENTS.md` larger-work check |
 | self-heal | Groups failed tool results into one recovery message and allows one safe retry |
 | fetch-error-normalizer | Marks failed `web_fetch` and fully failed `batch_web_fetch` results as errors so self-heal sees them |
-| hunk-inline | Shows `edit` and `write` results as compact diffs |
+| hunk-inline | Shows `edit` results as compact diffs and `write` results as compact summaries; uses Pi's renderer hook without replacing tool execution, so it can load with pi-cmux's remote tools |
 | mermaid-fit | When a Mermaid flowchart is too wide for the terminal, draws it in the other direction (`LR` ↔ `TD`). If it still does not fit, adds a line that gives the needed width instead of showing only the source |
 | file-preview | Click file links in the transcript to open them in nvim; Alt+O quick open |
 | right-column | Shared right-side column that the pi-desk task panel uses |
@@ -113,6 +113,7 @@ The cmux and nvim extensions do nothing outside cmux or without nvim.
 | pi-excalidraw | Excalidraw canvas tools |
 | pi-claude-bridge | Use a Claude subscription as a Pi provider |
 | pi-lazygit, pi-nvim | lazygit and nvim inside Pi |
+| pi-cmux | In cmux: new Pi chats (`/cmn`), splits (`/cmv`, `/cmh`), tool tabs (`/cmo`, `/cmt`), browser split with notes (`/cmb`), worktree handoffs (`/cmcv -c`), sidebar progress. The agent can do the same on request |
 | pi-tutor | `/tutor`: hint-first coding tutor that remembers topics |
 | [pi-desk](https://github.com/gosvig123/pi-desk) | `/desk`: conversations, tasks, Tick results |
 | [pi-tick](https://github.com/gosvig123/pi-tick/tree/pi-agent-kit) | Scheduled agent jobs (fork branch `pi-agent-kit`) |
