@@ -8,6 +8,7 @@
 - Continue the existing PR, branch, file, or sheet unless the user asks for a new one. If a new one seems better, ask first.
 - When confidence is low, gather more information. If it is still low, ask the user.
 - To work like an expert, use the expert's methods and tools, not only their words. Start from the rawest source available (logs, data, source code, transcripts), not from summaries. Name a role only to choose methods; do not role-play.
+- When a web dashboard blocks automation (bot checks, missing API permissions) and the user is signed in to it in their own Chrome, ask them to turn on **View → Developer → Allow JavaScript from Apple Events**. Then call the site's own API with `fetch()` from their signed-in tab through AppleScript, instead of asking for new API tokens. Do only changes they approved, and remind them to turn the setting off afterward.
 - Make errors actionable: operation, target, cause, and recovery step.
 - Plans and work artifacts are temporary. Keep the plan in the conversation; write a plan file only when the work spans sessions or the user asks. When done, move durable facts to `AGENTS.md`, `CONTEXT.md`, or docs, then delete the plans, scratch notes, throwaway scripts, and temp data you created. Delete an old plan that no longer matches the code; do not update it. Ask before you delete what you did not create.
 
